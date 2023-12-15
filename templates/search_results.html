@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <h1>Search Results for {{ query }}</h1>
+
+    <ul>
+        {% for file in files %}
+            <li><a href="{{ url_for('download', filename=file) }}" download>{{ file }}</a></li>
+        {% else %}
+            <p>No matching files found.</p>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('cabinet') }}">Back to Home</a>
+</body>

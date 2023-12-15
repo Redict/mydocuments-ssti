@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <h1>Welcome, {{ session['username'] }}</h1>
+    <a href="/upload">Upload a Document</a>
+    <a href="/logout">Logout</a>
+    <!-- Search Bar -->
+    <form action="/search" method="get">
+        <input type="text" id="query" name="query" placeholder="Search in content...">
+        <button type="submit">Search</button>
+    </form>
+    <!-- List of Uploaded Files -->
+    <h2>Your Uploaded Files</h2>
+    <ul>
+        {% for file in files %}
+            <li><a href="{{ url_for('download', filename=file) }}" download>{{ file }}</a></li>
+        {% else %}
+            <p>No files uploaded.</p>
+        {% endfor %}
+    </ul>
+    
+    <!-- Search Bar -->
+</body>
+</html>
