@@ -181,33 +181,7 @@ def search():
                 with open(file_path, "rt", encoding="utf-8", errors="ignore") as file:
                     if query.lower() in file.read().lower():
                         matching_files.append(filename)
-
-        template = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Search Results</title>
-            <link rel="stylesheet" type="text/css" href="/static/style.css">
-        </head>
-        <body>
-            <h1>Search Results for { query }</h1>
-
-            <ul>
-                {{% for file in files %}}
-                <li>
-                    <a href="{{{{ url_for('download', filename=file) }}}}" download>
-                        {{{{ file }}}}
-                    </a>
-                </li>
-                {{% else %}}
-                    <p>No matching files found.</p>
-                {{% endfor %}}
-            </ul>
-
-            <a href="{{{{ url_for('cabinet') }}}}">Back to Home</a>
-        </body>
-        """
-        return render_template_string(template, files=matching_files, query=query)
+        return render_template("search_results.html", files=matching_files, query=query)
     else:
         return redirect(url_for("login"))
 
